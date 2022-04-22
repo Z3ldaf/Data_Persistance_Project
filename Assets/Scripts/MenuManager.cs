@@ -36,8 +36,14 @@ public class MenuManager : MonoBehaviour
       }
     }
 
+    public void GoToSetting()
+    {
+      StartCoroutine(loadScene(2));
+    }
+
     public void QuitGame()
     {
+      saveManager.Instance.saveData();
       Application.Quit();
     }
 

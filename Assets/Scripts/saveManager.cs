@@ -9,6 +9,8 @@ public class saveManager : MonoBehaviour
     public static saveManager Instance;
     public int BestScore;
     public string bestScoreName = "";
+    public float paddleSpeed = 5f;
+    public float ballBounce = 1f;
 
     private void Awake()
     {
@@ -28,13 +30,17 @@ public class saveManager : MonoBehaviour
     {
       public int BestScore;
       public string playerName;
+      public float paddleSpeed;
+      public float ballBounce;
     }
 
-    public void saveData(int ScoreToSave, string playerName)
+    public void saveData()
     {
       SaveData data = new SaveData();
-      data.BestScore = ScoreToSave;
-      data.playerName = playerName;
+      data.BestScore = BestScore;
+      data.playerName = bestScoreName;
+      data.paddleSpeed = paddleSpeed;
+      data.ballBounce= ballBounce;
 
       BestScore = data.BestScore;
       bestScoreName = data.playerName;
@@ -53,6 +59,8 @@ public class saveManager : MonoBehaviour
 
         BestScore = data.BestScore;
         bestScoreName = data.playerName;
+        paddleSpeed = data.paddleSpeed;
+        ballBounce = data.ballBounce;
       }
     }
 }

@@ -92,7 +92,8 @@ public class MainManager : MonoBehaviour
     {
       if(m_Points > saveManager.Instance.BestScore)
       {
-          saveManager.Instance.saveData(m_Points, bestPlayer.text);
+          saveManager.Instance.BestScore = m_Points;
+          saveManager.Instance.saveData();
       }
       transition.SetTrigger("start");
       yield return new WaitForSeconds(waitingTime);
