@@ -17,6 +17,7 @@ public class MainManager : MonoBehaviour
     private bool m_Started = false;
     private int m_Points;
     public int BestScore = saveManager.Instance.BestScore;
+    public string bestScoreName = saveManager.Instance.bestScoreName;
 
     private bool m_GameOver = false;
 
@@ -25,7 +26,7 @@ public class MainManager : MonoBehaviour
 
     void Awake()
     {
-      BestScoreText.text = $"Best Score: {BestScore}";
+      BestScoreText.text = $"Best Score: {BestScore} name: " + bestScoreName;
     }
 
     // Start is called before the first frame update
@@ -87,7 +88,7 @@ public class MainManager : MonoBehaviour
     {
       if(m_Points > saveManager.Instance.BestScore)
       {
-          saveManager.Instance.saveData(m_Points);
+          saveManager.Instance.saveData(m_Points, bestScoreName);
       }
       transition.SetTrigger("start");
       yield return new WaitForSeconds(waitingTime);
