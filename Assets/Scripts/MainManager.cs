@@ -18,6 +18,9 @@ public class MainManager : MonoBehaviour
 
     private bool m_GameOver = false;
 
+    public Animator transition;
+    public float waitingTime = 1f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +60,7 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene("Menu");
+                StartCoroutine(loadScene(0));
             }
         }
     }
@@ -72,5 +75,12 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+    }
+
+    public IEnumerator loadScene(int index)
+    {
+      transition.SetTrigger("start");
+      yield return new WaitForSeconds(waitingTime);
+      SceneManager.LoadScene(index);
     }
 }
