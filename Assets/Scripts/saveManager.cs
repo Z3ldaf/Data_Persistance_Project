@@ -8,9 +8,13 @@ public class saveManager : MonoBehaviour
 {
     public static saveManager Instance;
     public int BestScore;
-    public string bestScoreName = "";
+    public string bestScoreName;
+    public string playerName;
     public float paddleSpeed = 5f;
     public float ballBounce = 1f;
+
+    public List<int> scores;
+    public List<string> names;
 
     private void Awake()
     {
@@ -40,10 +44,7 @@ public class saveManager : MonoBehaviour
       data.BestScore = BestScore;
       data.playerName = bestScoreName;
       data.paddleSpeed = paddleSpeed;
-      data.ballBounce= ballBounce;
-
-      BestScore = data.BestScore;
-      bestScoreName = data.playerName;
+      data.ballBounce = ballBounce;
 
        string json = JsonUtility.ToJson(data);
        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);

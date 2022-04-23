@@ -41,6 +41,11 @@ public class MenuManager : MonoBehaviour
       StartCoroutine(loadScene(2));
     }
 
+    public void GoToScores()
+    {
+      StartCoroutine(loadScene(3));
+    }
+
     public void QuitGame()
     {
       saveManager.Instance.saveData();
@@ -54,7 +59,7 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator loadScene(int index)
     {
-      saveManager.Instance.bestScoreName = playerName.text;
+      saveManager.Instance.playerName = playerName.text;
       transition.SetTrigger("start");
       yield return new WaitForSeconds(waitingTime);
       SceneManager.LoadScene(index);

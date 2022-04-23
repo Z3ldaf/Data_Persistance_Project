@@ -24,10 +24,13 @@ public class MainManager : MonoBehaviour
     public Animator transition;
     public float waitingTime = 1f;
 
+    private string bestScoreName = saveManager.Instance.bestScoreName;
+    private string playerName = saveManager.Instance.playerName;
+
+
     void Awake()
     {
       int BestScore = saveManager.Instance.BestScore;
-      string bestScoreName = saveManager.Instance.bestScoreName;
 
       BestScoreText.text = $"Best Score: {BestScore}";
       bestPlayer.text = "Name: " + bestScoreName;
@@ -93,8 +96,17 @@ public class MainManager : MonoBehaviour
       if(m_Points > saveManager.Instance.BestScore)
       {
           saveManager.Instance.BestScore = m_Points;
+          saveManager.Instance.bestScoreName = playerName;
+          saveManager.Instance.scores.Add(m_Points);
+          saveManager.Instance.names.Add(bestScoreName);
           saveManager.Instance.saveData();
       }
+      else
+      {
+          saveManager.Instance.scores.Add(m_Points);
+          saveManager.Instance.names.Add(playerName);
+      }
+
       transition.SetTrigger("start");
       yield return new WaitForSeconds(waitingTime);
       SceneManager.LoadScene(index);
